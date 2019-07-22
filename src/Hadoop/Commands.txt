@@ -1,0 +1,82 @@
+################################################################################################
+#																							   #
+#									Bike Sharing Demand 									   #
+#											Hadoop											   #
+#						Acquiring, Exploring and Preparing the Data			   				   #
+#																							   #																							   #
+# Nassim TIGUENITINE 																	       #
+# ntiguenitine@gmail.com																	   #
+#																							   #  
+################################################################################################
+
+
+Prerequisites
+-----------------------------------------------------
+Download Dataset from Kaggle.com 
+
+Use Google Cloud Platform to deploy a cluster hadoop
+
+Transferring files to instances ( hadoop cluster )
+-----------------------------------------------------
+Open a new command prompt
+
+	> gcloud compute scp D:\BigDataProject\data\*.csv  ntiguenitine@hadoopcluster-m:
+
+Transferring files from local to hdfs 
+-----------------------------------------------------
+
+	$ hdfs dfs -copyFromLocal *.csv /user/project/data
+	
+Moving Data from CSV files into Hive tables
+-----------------------------------------------------
+
+Create the external tables 
+
+	hive> CREATE EXTERNAL TABLE IF NOT EXISTS train_bike(
+		> datetime TIMESTAMP, season INT, holiday INT, workingday INT, weather INT, temp FLOAT, atemp FLOAT, humidity INT, windspeed FLOAT, casual INT, registered INT, count INT)
+		> COMMENT 'Data about bike sharing demand from a CSV file'
+		> ROW FORMAT DELIMITED
+		> FIELDS TERMINATED BY ','
+		> LINES TERMINATED BY '\n'
+		> STORED AS TEXTFILE
+		> LOAD DATA INPATH '/user/project/data/train_bike.csv' OVERWRITE INTO TABLE train_bike;
+	
+	hive> CREATE EXTERNAL TABLE IF NOT EXISTS test_bike(
+		> datetime TIMESTAMP, season INT, holiday INT, workingday INT, weather INT, temp FLOAT, atemp FLOAT, humidity INT, windspeed FLOAT)
+		> COMMENT 'Data about bike sharing demand from a CSV file'
+		> ROW FORMAT DELIMITED
+		> FIELDS TERMINATED BY ','
+		> LINES TERMINATED BY '\n'
+		> STORED AS TEXTFILE
+		> LOAD DATA INPATH '/user/project/data/test_bike.csv' OVERWRITE INTO TABLE test_bike;
+	
+Create the ORC tables
+
+	hive> CREATE EXTERNAL TABLE IF NOT EXISTS train(
+		> datetime TIMESTAMP, season INT, holiday INT, workingday INT, weather INT, temp FLOAT, atemp FLOAT, humidity INT, windspeed FLOAT, casual INT, registered INT, count INT)
+		> COMMENT 'Data about bike sharing demand from a CSV file'
+		> ROW FORMAT DELIMITED
+		> FIELDS TERMINATED BY ','
+		> STORED AS ORC;
+	
+	hive> CREATE EXTERNAL TABLE IF NOT EXISTS test(
+		> datetime TIMESTAMP, season INT, holiday INT, workingday INT, weather INT, temp FLOAT, atemp FLOAT, humidity INT, windspeed FLOAT)
+		> COMMENT 'Data about bike sharing demand from a CSV file'
+		> ROW FORMAT DELIMITED
+		> FIELDS TERMINATED BY ','
+		> STORED AS ORC;
+		
+Insert the data from the external tables to the Hive ORC tables
+
+	hive> INSERT OVERWRITE TABLE train SELECT * FROM train_bike;
+	
+	hive> INSERT OVERWRITE TABLE test SELECT * FROM test_bike;
+
+
+
+
+
+
+
+
+

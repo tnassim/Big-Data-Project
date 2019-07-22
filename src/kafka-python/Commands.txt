@@ -1,0 +1,47 @@
+###################################################################################################################################
+#																																  # 
+#													Bike Sharing Demand 														  #
+#														Kafka Python 															  #
+#											Producer, Consumer and Mongo Client			  										  #
+#																																  #							
+# Nassim TIGUENITINE																											  #
+# ntiguenitine@gmail.com 																										  #
+#																																  #
+###################################################################################################################################
+
+
+==============================================================
+Read Data From Kafka Stream and Store it into MongoDB
+==============================================================
+
+Prerequisites
+-------------------------------------------------------------
+Download, install and start Kafka, Python and MongoDB
+
+Start Zookeeper server 
+-------------------------------------------------------------
+Open a new command prompt and navigate to .../kafka 
+
+	>.\bin\windows\zookeeper-server-start.bat config\zookeeper.properties
+
+Start Kafka server
+-------------------------------------------------------------
+Open a new command prompt and navigate to .../kafka 
+
+	>bin\windows\kafka-server-start.bat config\server.properties
+
+Create a topic 
+--------------------------------------------------------------
+Open a new command prompt and navigate to .../kafka 
+
+	>bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic bike-stations
+
+Execute producer and consumer scripts
+-------------------------------------------------------------
+Open a new command prompt and navigate to .../python
+
+	>.\python D:\BigDataProject\src\kafka-python\bike-get-stations.py
+	
+Open a new command prompt and navigate to .../python
+
+	>.\python D:\BigDataProject\src\kafka-python\bike-monitor-stations.py

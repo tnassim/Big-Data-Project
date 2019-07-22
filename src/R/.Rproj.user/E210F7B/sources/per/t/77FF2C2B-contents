@@ -1,0 +1,50 @@
+# *****************************************************************************
+# Forêt aléatoire d'arbres de décision : Données du Titanic
+#
+# Auteur : Fabrice LEBEL, 2018
+# *****************************************************************************
+
+# ------------------------------------------------------------------------------
+# Jeux de donnees
+# ------------------------------------------------------------------------------
+train <- read.csv("titanic_train.csv")
+test <- read.csv("titanic_test.csv")
+
+colsel <- c("Survived", "Pclass", "Sex", "Age")
+
+train_dataset <- train[colsel]
+head(train_dataset)
+str(train_dataset)
+train_dataset$Survived <- as.factor(train_dataset$Survived)
+train_dataset$Pclass <- as.factor(train_dataset$Pclass)
+summary(train_dataset)
+
+test_dataset <- test[colsel]
+head(test_dataset)
+str(test_dataset)
+test_dataset$Survived <- as.factor(test_dataset$Survived)
+test_dataset$Pclass <- as.factor(test_dataset$Pclass)
+summary(test_dataset)
+
+# ------------------------------------------------------------------------------
+# Modele
+# ------------------------------------------------------------------------------
+library(randomForest)
+?randomForest
+set.seed(123)
+
+X_features <- c("Pclass", "Sex", "Age")
+num_vars <- ncol(train_dataset[X_features])
+modelBag <- randomForest(Survived ~ ., data=train_dataset,
+                         ntree=nrow(train_dataset))
+
+# ------------------------------------------------------------------------------
+# Predictions et performances
+# ------------------------------------------------------------------------------
+# Predictions sur l'echantillon de test
+predictBag <- predict(modelBag, newdata=test_dataset)
+predictBag
+
+# Perforamnces
+library(caret)
+confusionMatrix(predictBag, reference=test_dataset$Survived, positive="1")

@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1547574854260.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1551202660",
+    "id" : "7E90BE54",
+    "lastKnownWriteTime" : 1548460003,
+    "last_content_update" : 1548460003946,
+    "path" : "D:/BigDataProject/src/R/Bike_Sharing_Demand.R",
+    "project_path" : "Bike_Sharing_Demand.R",
+    "properties" : {
+        "cursorPosition" : "248,0",
+        "scrollLine" : "226",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1547659885403.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2483495974",
+    "id" : "77FF2C2B",
+    "lastKnownWriteTime" : 1543514057,
+    "last_content_update" : 1543514057,
+    "path" : "D:/BIG DATA Training/ML Training/titanic/random_forest_titanic.R",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "13,0",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
